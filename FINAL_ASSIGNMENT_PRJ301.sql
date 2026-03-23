@@ -85,6 +85,27 @@ CREATE TABLE Feedbacks (
 );
 GO
 
+	-- ============================================
+-- TẠO BẢNG CHAT CHO RESTO RESTAURANT
+-- Chạy script này trên SQL Server của bạn
+-- ============================================
+
+CREATE TABLE ChatMessages (
+    messageId    INT IDENTITY(1,1) PRIMARY KEY,
+    guestId      INT NOT NULL,                        -- Người gửi/nhận (Guest)
+    senderRole   VARCHAR(10) NOT NULL,                -- 'guest' hoặc 'staff'
+    senderName   NVARCHAR(100) NOT NULL,              -- Tên hiển thị
+    content      NVARCHAR(MAX) NOT NULL,              -- Nội dung tin nhắn
+    sentAt       DATETIME DEFAULT GETDATE(),          -- Thời gian gửi
+    isRead       BIT DEFAULT 0,                       -- Staff đã đọc chưa
+
+    CONSTRAINT FK_Chat_Guest FOREIGN KEY (guestId)
+        REFERENCES Guests(guestId) ON DELETE CASCADE
+);
+
+-- Index để query nhanh theo guestId
+CREATE INDEX IX_Chat_GuestId ON ChatMessages(guestId, sentAt);
+
 -- =============================================
 -- 3. CHÈN DỮ LIỆU MẪU (SEED DATA)
 -- =============================================
