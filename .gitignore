@@ -1,0 +1,16 @@
+# Build outputs
+/build/
+/dist/
+*.war
+*.ear
+
+# NetBeans private (local machine settings / secrets)
+nbproject/private/
+nbproject/private/**
+
+# Database / API secrets
+web/WEB-INF/ConnectDB.properties
+web/WEB-INF/Recaptcha.properties
+build/web/WEB-INF/ConnectDB.properties
+build/web/WEB-INF/Recaptcha.properties
+
